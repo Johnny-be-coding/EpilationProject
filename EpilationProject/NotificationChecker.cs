@@ -8,13 +8,9 @@ namespace EpilationProject
     {
         public List<Client> GetUpcomingProcedures(List<Client> clients, int daysAhead = 15)
         {
-            DateTime today = DateTime.Now.Date;
-            DateTime futureDate = today.AddDays(daysAhead);
-
-            return clients.Where(c => 
-                c.DateOfFirstProcedure >= today && 
-                c.DateOfFirstProcedure <= futureDate
-            ).OrderBy(c => c.DateOfFirstProcedure).ToList();
+            return clients.Where(c => ProcedureScheduler.IsNextProcedureUpcoming(c, daysAhead))
+                .OrderBy(c => ProcedureScheduler.CalculateNextProcedureDate(c.DateOfFirstProcedure, c.ProcedureCount, c.Service))
+                .ToList();
         }
 
         public bool HasUpcomingProcedures(List<Client> clients, int daysAhead = 15)
@@ -26,12 +22,18 @@ namespace EpilationProject
         {
             var upcomingClients = GetUpcomingProcedures(clients, daysAhead);
             if (upcomingClients.Count == 0)
-                return "No upcoming procedures in the next 15 days.";
+                return $"No upcoming procedures in the next {daysAhead} days.";
 
             string summary = $"Upcoming procedures in the next {daysAhead} days:\n\n";
             foreach (var client in upcomingClients)
             {
-                summary += $"• {client.Name} - {client.DateOfFirstProcedure:MMMM dd, yyyy} ({client.Service})\n";
+                DateTime nextProcedureDate = ProcedureScheduler.CalculateNextProcedureDate(
+                    client.DateOfFirstProcedure, 
+                    client.ProcedureCount, 
+                    client.Service
+                );
+                int nextProcedureNumber = client.ProcedureCount + 1;
+                summary += $"• {client.Name} - Procedure #{nextProcedureNumber} on {nextProcedureDate:MMMM dd, yyyy} ({client.Service})\n";
             }
             return summary;
         }

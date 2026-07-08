@@ -46,7 +46,12 @@ namespace EpilationProject
                         {
                             dateOfFirstProcedure = date;
                         }
-                        clients.Add(new Client(id, parts[1], parts[2], parts[3], energy, phototype, dateOfFirstProcedure));
+                        int procedureCount = 0;
+                        if (parts.Length > 7 && int.TryParse(parts[7], out int count))
+                        {
+                            procedureCount = count;
+                        }
+                        clients.Add(new Client(id, parts[1], parts[2], parts[3], energy, phototype, dateOfFirstProcedure, procedureCount));
                     }
                 }
             }
@@ -62,7 +67,7 @@ namespace EpilationProject
         {
             try
             {
-                var lines = clients.Select(c => $"{c.Id}|{c.Name}|{c.Phone}|{c.Service}|{c.Energy}|{c.Phototype}|{c.DateOfFirstProcedure:yyyy-MM-dd}").ToArray();
+                var lines = clients.Select(c => $"{c.Id}|{c.Name}|{c.Phone}|{c.Service}|{c.Energy}|{c.Phototype}|{c.DateOfFirstProcedure:yyyy-MM-dd}|{c.ProcedureCount}").ToArray();
                 File.WriteAllLines(dataFilePath, lines);
             }
             catch (Exception ex)

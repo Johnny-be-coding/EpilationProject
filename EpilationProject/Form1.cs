@@ -50,8 +50,14 @@ namespace EpilationProject
                 return;
             }
 
+            if (!int.TryParse(txtProcedureCount.Text, out int procedureCount) || procedureCount < 0)
+            {
+                MessageBox.Show("Procedure Count must be a non-negative number.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int nextId = dataManager.GetNextId(clients);
-            Client newClient = new Client(nextId, txtName.Text, txtPhone.Text, cmbService.SelectedItem.ToString(), txtEnergy.Text, txtPhototype.Text, dtpDateOfFirstProcedure.Value);
+            Client newClient = new Client(nextId, txtName.Text, txtPhone.Text, cmbService.SelectedItem.ToString(), txtEnergy.Text, txtPhototype.Text, dtpDateOfFirstProcedure.Value, procedureCount);
             clients.Add(newClient);
             dataManager.SaveClients(clients);
 
@@ -76,6 +82,12 @@ namespace EpilationProject
                 return;
             }
 
+            if (!int.TryParse(txtProcedureCount.Text, out int procedureCount) || procedureCount < 0)
+            {
+                MessageBox.Show("Procedure Count must be a non-negative number.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int selectedIndex = listBoxClients.SelectedIndex;
             Client clientToUpdate = clients[selectedIndex];
 
@@ -85,6 +97,7 @@ namespace EpilationProject
             clientToUpdate.Energy = txtEnergy.Text;
             clientToUpdate.Phototype = txtPhototype.Text;
             clientToUpdate.DateOfFirstProcedure = dtpDateOfFirstProcedure.Value;
+            clientToUpdate.ProcedureCount = procedureCount;
 
             dataManager.SaveClients(clients);
             RefreshListBox();
@@ -125,6 +138,7 @@ namespace EpilationProject
                 cmbService.SelectedItem = selectedClient.Service;
                 txtEnergy.Text = selectedClient.Energy;
                 txtPhototype.Text = selectedClient.Phototype;
+                txtProcedureCount.Text = selectedClient.ProcedureCount.ToString();
 
                 // Ensure the date is within DateTimePicker's valid range
                 DateTime date = selectedClient.DateOfFirstProcedure;
@@ -143,6 +157,7 @@ namespace EpilationProject
             cmbService.SelectedIndex = -1;
             txtEnergy.Clear();
             txtPhototype.Clear();
+            txtProcedureCount.Clear();
             dtpDateOfFirstProcedure.Value = DateTime.Now;
             listBoxClients.SelectedIndex = -1;
         }

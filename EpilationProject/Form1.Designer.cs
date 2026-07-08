@@ -40,6 +40,8 @@ namespace EpilationProject
             this.txtPhototype = new System.Windows.Forms.TextBox();
             this.lblDate = new System.Windows.Forms.Label();
             this.dtpDateOfFirstProcedure = new System.Windows.Forms.DateTimePicker();
+            this.lblProcedureCount = new System.Windows.Forms.Label();
+            this.txtProcedureCount = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -151,9 +153,25 @@ namespace EpilationProject
             this.dtpDateOfFirstProcedure.Size = new System.Drawing.Size(250, 20);
             this.dtpDateOfFirstProcedure.TabIndex = 16;
             // 
+            // lblProcedureCount
+            // 
+            this.lblProcedureCount.AutoSize = true;
+            this.lblProcedureCount.Location = new System.Drawing.Point(12, 195);
+            this.lblProcedureCount.Name = "lblProcedureCount";
+            this.lblProcedureCount.Size = new System.Drawing.Size(82, 13);
+            this.lblProcedureCount.TabIndex = 19;
+            this.lblProcedureCount.Text = "Procedure Count:";
+            // 
+            // txtProcedureCount
+            // 
+            this.txtProcedureCount.Location = new System.Drawing.Point(100, 192);
+            this.txtProcedureCount.Name = "txtProcedureCount";
+            this.txtProcedureCount.Size = new System.Drawing.Size(250, 20);
+            this.txtProcedureCount.TabIndex = 20;
+            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 195);
+            this.btnAdd.Location = new System.Drawing.Point(12, 225);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 10;
@@ -163,7 +181,7 @@ namespace EpilationProject
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(93, 195);
+            this.btnUpdate.Location = new System.Drawing.Point(93, 225);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 11;
@@ -173,7 +191,7 @@ namespace EpilationProject
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(174, 195);
+            this.btnDelete.Location = new System.Drawing.Point(174, 225);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 12;
@@ -183,7 +201,7 @@ namespace EpilationProject
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(255, 195);
+            this.btnSettings.Location = new System.Drawing.Point(255, 225);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(95, 23);
             this.btnSettings.TabIndex = 17;
@@ -193,7 +211,7 @@ namespace EpilationProject
             // 
             // btnCheckNotifications
             // 
-            this.btnCheckNotifications.Location = new System.Drawing.Point(356, 195);
+            this.btnCheckNotifications.Location = new System.Drawing.Point(356, 225);
             this.btnCheckNotifications.Name = "btnCheckNotifications";
             this.btnCheckNotifications.Size = new System.Drawing.Size(120, 23);
             this.btnCheckNotifications.TabIndex = 18;
@@ -204,18 +222,18 @@ namespace EpilationProject
             // listBoxClients
             // 
             this.listBoxClients.FormattingEnabled = true;
-            this.listBoxClients.Location = new System.Drawing.Point(12, 240);
+            this.listBoxClients.Location = new System.Drawing.Point(12, 270);
             this.listBoxClients.Name = "listBoxClients";
-            this.listBoxClients.Size = new System.Drawing.Size(576, 221);
+            this.listBoxClients.Size = new System.Drawing.Size(576, 191);
             this.listBoxClients.TabIndex = 13;
             this.listBoxClients.SelectedIndexChanged += new System.EventHandler(this.ListBoxClients_SelectedIndexChanged);
             // 
             // lblClientList
             // 
             this.lblClientList.AutoSize = true;
-            this.lblClientList.Location = new System.Drawing.Point(12, 220);
+            this.lblClientList.Location = new System.Drawing.Point(12, 250);
             this.lblClientList.Name = "lblClientList";
-            this.lblClientList.Size = new System.Drawing.Size(60, 13);
+            this.lblClientList.Size = new System.Drawing.Size(51, 13);
             this.lblClientList.TabIndex = 14;
             this.lblClientList.Text = "Clients:";
             // 
@@ -228,6 +246,8 @@ namespace EpilationProject
             this.Controls.Add(this.listBoxClients);
             this.Controls.Add(this.btnCheckNotifications);
             this.Controls.Add(this.btnSettings);
+            this.Controls.Add(this.txtProcedureCount);
+            this.Controls.Add(this.lblProcedureCount);
             this.Controls.Add(this.dtpDateOfFirstProcedure);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.btnDelete);
@@ -264,6 +284,8 @@ namespace EpilationProject
         private System.Windows.Forms.TextBox txtPhototype;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.DateTimePicker dtpDateOfFirstProcedure;
+        private System.Windows.Forms.Label lblProcedureCount;
+        private System.Windows.Forms.TextBox txtProcedureCount;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
