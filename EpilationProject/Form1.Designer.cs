@@ -38,9 +38,13 @@ namespace EpilationProject
             this.txtEnergy = new System.Windows.Forms.TextBox();
             this.lblPhototype = new System.Windows.Forms.Label();
             this.txtPhototype = new System.Windows.Forms.TextBox();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.dtpDateOfFirstProcedure = new System.Windows.Forms.DateTimePicker();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.btnCheckNotifications = new System.Windows.Forms.Button();
             this.listBoxClients = new System.Windows.Forms.ListBox();
             this.lblClientList = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -131,9 +135,25 @@ namespace EpilationProject
             this.txtPhototype.Size = new System.Drawing.Size(250, 20);
             this.txtPhototype.TabIndex = 9;
             // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(12, 165);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(86, 13);
+            this.lblDate.TabIndex = 15;
+            this.lblDate.Text = "First Procedure:";
+            // 
+            // dtpDateOfFirstProcedure
+            // 
+            this.dtpDateOfFirstProcedure.Location = new System.Drawing.Point(100, 162);
+            this.dtpDateOfFirstProcedure.Name = "dtpDateOfFirstProcedure";
+            this.dtpDateOfFirstProcedure.Size = new System.Drawing.Size(250, 20);
+            this.dtpDateOfFirstProcedure.TabIndex = 16;
+            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 165);
+            this.btnAdd.Location = new System.Drawing.Point(12, 195);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 10;
@@ -143,7 +163,7 @@ namespace EpilationProject
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(93, 165);
+            this.btnUpdate.Location = new System.Drawing.Point(93, 195);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 11;
@@ -153,7 +173,7 @@ namespace EpilationProject
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(174, 165);
+            this.btnDelete.Location = new System.Drawing.Point(174, 195);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 12;
@@ -161,19 +181,39 @@ namespace EpilationProject
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(255, 195);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(95, 23);
+            this.btnSettings.TabIndex = 17;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
+            // 
+            // btnCheckNotifications
+            // 
+            this.btnCheckNotifications.Location = new System.Drawing.Point(356, 195);
+            this.btnCheckNotifications.Name = "btnCheckNotifications";
+            this.btnCheckNotifications.Size = new System.Drawing.Size(120, 23);
+            this.btnCheckNotifications.TabIndex = 18;
+            this.btnCheckNotifications.Text = "Check Notifications";
+            this.btnCheckNotifications.UseVisualStyleBackColor = true;
+            this.btnCheckNotifications.Click += new System.EventHandler(this.BtnCheckNotifications_Click);
+            // 
             // listBoxClients
             // 
             this.listBoxClients.FormattingEnabled = true;
-            this.listBoxClients.Location = new System.Drawing.Point(12, 210);
+            this.listBoxClients.Location = new System.Drawing.Point(12, 240);
             this.listBoxClients.Name = "listBoxClients";
-            this.listBoxClients.Size = new System.Drawing.Size(576, 251);
+            this.listBoxClients.Size = new System.Drawing.Size(576, 221);
             this.listBoxClients.TabIndex = 13;
             this.listBoxClients.SelectedIndexChanged += new System.EventHandler(this.ListBoxClients_SelectedIndexChanged);
             // 
             // lblClientList
             // 
             this.lblClientList.AutoSize = true;
-            this.lblClientList.Location = new System.Drawing.Point(12, 190);
+            this.lblClientList.Location = new System.Drawing.Point(12, 220);
             this.lblClientList.Name = "lblClientList";
             this.lblClientList.Size = new System.Drawing.Size(60, 13);
             this.lblClientList.TabIndex = 14;
@@ -186,6 +226,10 @@ namespace EpilationProject
             this.ClientSize = new System.Drawing.Size(600, 475);
             this.Controls.Add(this.lblClientList);
             this.Controls.Add(this.listBoxClients);
+            this.Controls.Add(this.btnCheckNotifications);
+            this.Controls.Add(this.btnSettings);
+            this.Controls.Add(this.dtpDateOfFirstProcedure);
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnAdd);
@@ -218,9 +262,13 @@ namespace EpilationProject
         private System.Windows.Forms.TextBox txtEnergy;
         private System.Windows.Forms.Label lblPhototype;
         private System.Windows.Forms.TextBox txtPhototype;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.DateTimePicker dtpDateOfFirstProcedure;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Button btnCheckNotifications;
         private System.Windows.Forms.ListBox listBoxClients;
         private System.Windows.Forms.Label lblClientList;
     }

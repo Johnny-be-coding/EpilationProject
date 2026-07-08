@@ -51,7 +51,7 @@ namespace EpilationProject
             }
 
             int nextId = dataManager.GetNextId(clients);
-            Client newClient = new Client(nextId, txtName.Text, txtPhone.Text, cmbService.SelectedItem.ToString(), txtEnergy.Text, txtPhototype.Text);
+            Client newClient = new Client(nextId, txtName.Text, txtPhone.Text, cmbService.SelectedItem.ToString(), txtEnergy.Text, txtPhototype.Text, dtpDateOfFirstProcedure.Value);
             clients.Add(newClient);
             dataManager.SaveClients(clients);
 
@@ -84,6 +84,7 @@ namespace EpilationProject
             clientToUpdate.Service = cmbService.SelectedItem.ToString();
             clientToUpdate.Energy = txtEnergy.Text;
             clientToUpdate.Phototype = txtPhototype.Text;
+            clientToUpdate.DateOfFirstProcedure = dtpDateOfFirstProcedure.Value;
 
             dataManager.SaveClients(clients);
             RefreshListBox();
@@ -124,6 +125,14 @@ namespace EpilationProject
                 cmbService.SelectedItem = selectedClient.Service;
                 txtEnergy.Text = selectedClient.Energy;
                 txtPhototype.Text = selectedClient.Phototype;
+
+                // Ensure the date is within DateTimePicker's valid range
+                DateTime date = selectedClient.DateOfFirstProcedure;
+                if (date < dtpDateOfFirstProcedure.MinDate || date > dtpDateOfFirstProcedure.MaxDate)
+                {
+                    date = DateTime.Now;
+                }
+                dtpDateOfFirstProcedure.Value = date;
             }
         }
 
@@ -134,7 +143,44 @@ namespace EpilationProject
             cmbService.SelectedIndex = -1;
             txtEnergy.Clear();
             txtPhototype.Clear();
+            dtpDateOfFirstProcedure.Value = DateTime.Now;
             listBoxClients.SelectedIndex = -1;
+        }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm();
+            settingsForm.ShowDialog(this);
+        }
+
+        private void BtnCheckNotifications_Click(object sender, EventArgs e)
+        {
+            SettingsManager settingsManager = new SettingsManager();
+            Settings settings = settingsManager.LoadSettings();
+
+            if (string.IsNullOrWhiteSpace(settings.EpilationPersonEmail))
+            {
+                MessageBox.Show("Please configure your email in Settings first.", "Settings Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            NotificationChecker checker = new NotificationChecker();
+            var upcomingClients = checker.GetUpcomingProcedures(clients, 15);
+
+            if (upcomingClients.Count == 0)
+            {
+                MessageBox.Show("No upcoming procedures in the next 15 days.", "No Reminders", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string summary = checker.GetUpcomingProceduresSummary(clients, 15);
+            DialogResult result = MessageBox.Show(summary + "\n\nWould you like to send email notifications for these clients?", "Upcoming Procedures", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                EmailNotifier emailNotifier = new EmailNotifier(settings);
+                emailNotifier.SendAllUpcomingReminders(upcomingClients);
+            }
         }
     }
 }

@@ -41,7 +41,12 @@ namespace EpilationProject
                     {
                         string energy = parts.Length > 4 ? parts[4] : "";
                         string phototype = parts.Length > 5 ? parts[5] : "";
-                        clients.Add(new Client(id, parts[1], parts[2], parts[3], energy, phototype));
+                        DateTime dateOfFirstProcedure = DateTime.MinValue;
+                        if (parts.Length > 6 && DateTime.TryParse(parts[6], out DateTime date))
+                        {
+                            dateOfFirstProcedure = date;
+                        }
+                        clients.Add(new Client(id, parts[1], parts[2], parts[3], energy, phototype, dateOfFirstProcedure));
                     }
                 }
             }
@@ -57,7 +62,7 @@ namespace EpilationProject
         {
             try
             {
-                var lines = clients.Select(c => $"{c.Id}|{c.Name}|{c.Phone}|{c.Service}|{c.Energy}|{c.Phototype}").ToArray();
+                var lines = clients.Select(c => $"{c.Id}|{c.Name}|{c.Phone}|{c.Service}|{c.Energy}|{c.Phototype}|{c.DateOfFirstProcedure:yyyy-MM-dd}").ToArray();
                 File.WriteAllLines(dataFilePath, lines);
             }
             catch (Exception ex)

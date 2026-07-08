@@ -10,12 +10,13 @@ namespace EpilationProject
         public string Service { get; set; }
         public string Energy { get; set; }
         public string Phototype { get; set; }
+        public DateTime DateOfFirstProcedure { get; set; }
 
         public Client()
         {
         }
 
-        public Client(int id, string name, string phone, string service, string energy, string phototype)
+        public Client(int id, string name, string phone, string service, string energy, string phototype, DateTime dateOfFirstProcedure)
         {
             Id = id;
             Name = name;
@@ -23,6 +24,7 @@ namespace EpilationProject
             Service = service;
             Energy = energy;
             Phototype = phototype;
+            DateOfFirstProcedure = dateOfFirstProcedure;
         }
 
         public override string ToString()
