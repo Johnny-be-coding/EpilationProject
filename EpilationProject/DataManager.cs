@@ -37,9 +37,11 @@ namespace EpilationProject
                         continue;
 
                     var parts = line.Split('|');
-                    if (parts.Length == 4 && int.TryParse(parts[0], out int id))
+                    if (parts.Length >= 4 && int.TryParse(parts[0], out int id))
                     {
-                        clients.Add(new Client(id, parts[1], parts[2], parts[3]));
+                        string energy = parts.Length > 4 ? parts[4] : "";
+                        string phototype = parts.Length > 5 ? parts[5] : "";
+                        clients.Add(new Client(id, parts[1], parts[2], parts[3], energy, phototype));
                     }
                 }
             }
@@ -55,7 +57,7 @@ namespace EpilationProject
         {
             try
             {
-                var lines = clients.Select(c => $"{c.Id}|{c.Name}|{c.Phone}|{c.Service}").ToArray();
+                var lines = clients.Select(c => $"{c.Id}|{c.Name}|{c.Phone}|{c.Service}|{c.Energy}|{c.Phototype}").ToArray();
                 File.WriteAllLines(dataFilePath, lines);
             }
             catch (Exception ex)

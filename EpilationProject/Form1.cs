@@ -44,14 +44,14 @@ namespace EpilationProject
         {
             if (string.IsNullOrWhiteSpace(txtName.Text) || 
                 string.IsNullOrWhiteSpace(txtPhone.Text) || 
-                string.IsNullOrWhiteSpace(txtService.Text))
+                cmbService.SelectedIndex < 0)
             {
                 MessageBox.Show("Please fill in all fields.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             int nextId = dataManager.GetNextId(clients);
-            Client newClient = new Client(nextId, txtName.Text, txtPhone.Text, txtService.Text);
+            Client newClient = new Client(nextId, txtName.Text, txtPhone.Text, cmbService.SelectedItem.ToString(), txtEnergy.Text, txtPhototype.Text);
             clients.Add(newClient);
             dataManager.SaveClients(clients);
 
@@ -70,7 +70,7 @@ namespace EpilationProject
 
             if (string.IsNullOrWhiteSpace(txtName.Text) || 
                 string.IsNullOrWhiteSpace(txtPhone.Text) || 
-                string.IsNullOrWhiteSpace(txtService.Text))
+                cmbService.SelectedIndex < 0)
             {
                 MessageBox.Show("Please fill in all fields.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -81,7 +81,9 @@ namespace EpilationProject
 
             clientToUpdate.Name = txtName.Text;
             clientToUpdate.Phone = txtPhone.Text;
-            clientToUpdate.Service = txtService.Text;
+            clientToUpdate.Service = cmbService.SelectedItem.ToString();
+            clientToUpdate.Energy = txtEnergy.Text;
+            clientToUpdate.Phototype = txtPhototype.Text;
 
             dataManager.SaveClients(clients);
             RefreshListBox();
@@ -119,7 +121,9 @@ namespace EpilationProject
                 Client selectedClient = clients[listBoxClients.SelectedIndex];
                 txtName.Text = selectedClient.Name;
                 txtPhone.Text = selectedClient.Phone;
-                txtService.Text = selectedClient.Service;
+                cmbService.SelectedItem = selectedClient.Service;
+                txtEnergy.Text = selectedClient.Energy;
+                txtPhototype.Text = selectedClient.Phototype;
             }
         }
 
@@ -127,7 +131,9 @@ namespace EpilationProject
         {
             txtName.Clear();
             txtPhone.Clear();
-            txtService.Clear();
+            cmbService.SelectedIndex = -1;
+            txtEnergy.Clear();
+            txtPhototype.Clear();
             listBoxClients.SelectedIndex = -1;
         }
     }
